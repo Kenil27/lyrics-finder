@@ -1,5 +1,5 @@
 import React from "react";
-import { app, auth, db } from "../Utils/firebase";
+import { app, auth, db } from "../utils/firebase";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style.css";
 import {

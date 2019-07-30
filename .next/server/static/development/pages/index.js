@@ -93,57 +93,6 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "./Utils/firebase.js":
-/*!***************************!*\
-  !*** ./Utils/firebase.js ***!
-  \***************************/
-/*! exports provided: app, auth, db */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "auth", function() { return auth; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "db", function() { return db; });
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ "firebase/app");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "app", function() { return firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a; });
-/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ "firebase/firestore");
-/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(firebase_firestore__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ "firebase/auth");
-/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(firebase_auth__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-const config = {
-  apiKey: "AIzaSyDK8iBShvK_MyyHCyVLmoSsoBk6295IrrQ",
-  authDomain: "react-firebase-7e1a7.firebaseapp.com",
-  databaseURL: "https://react-firebase-7e1a7.firebaseio.com",
-  projectId: "react-firebase-7e1a7",
-  storageBucket: "",
-  messagingSenderId: "179179280724",
-  appId: "1:179179280724:web:10a41c07b79b0789"
-}; // let isInitialized = false
-
-let db;
-let auth;
-const settings = {
-  /* your settings... */
-  timestampsInSnapshots: true
-}; // function initialize() {
-
-if (!firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.apps.length) {
-  firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializeApp(config);
-  auth = firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth();
-  db = firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.firestore();
-  db.settings(settings); // isInitialized = true
-} // }
-// initialize()
-
-
-
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js":
 /*!*******************************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js ***!
@@ -585,7 +534,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Utils_firebase__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Utils/firebase */ "./Utils/firebase.js");
+/* harmony import */ var _utils_firebase__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/firebase */ "./utils/firebase.js");
 /* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
 /* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../style.css */ "./style.css");
@@ -616,14 +565,14 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "componentDidMount", () => {
-      _Utils_firebase__WEBPACK_IMPORTED_MODULE_2__["auth"].signInAnonymously().catch(function (error) {
+      _utils_firebase__WEBPACK_IMPORTED_MODULE_2__["auth"].signInAnonymously().catch(function (error) {
         this.errorMessage = error.message;
       });
       this.listenToAuth();
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "listenToAuth", () => {
-      _Utils_firebase__WEBPACK_IMPORTED_MODULE_2__["app"].auth().onAuthStateChanged(user => {
+      _utils_firebase__WEBPACK_IMPORTED_MODULE_2__["app"].auth().onAuthStateChanged(user => {
         if (user) {
           // User is signed in.
           this.userId = user.uid;
@@ -660,7 +609,7 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
         isResult: false,
         fetchData: true
       });
-      let res = _Utils_firebase__WEBPACK_IMPORTED_MODULE_2__["db"].collection("stavan").where("name", "==", "".concat(this.state.value.toLowerCase()));
+      let res = _utils_firebase__WEBPACK_IMPORTED_MODULE_2__["db"].collection("stavan").where("name", "==", "".concat(this.state.value.toLowerCase()));
       res.get().then(querySnapshot => {
         if (querySnapshot.docs.length > 0) {
           querySnapshot.forEach(doc => {
@@ -831,6 +780,56 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
   \*******************/
 /*! no static exports found */
 /***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./utils/firebase.js":
+/*!***************************!*\
+  !*** ./utils/firebase.js ***!
+  \***************************/
+/*! exports provided: app, auth, db */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "auth", function() { return auth; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "db", function() { return db; });
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ "firebase/app");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "app", function() { return firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a; });
+/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ "firebase/firestore");
+/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(firebase_firestore__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ "firebase/auth");
+/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(firebase_auth__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const config = {
+  apiKey: "AIzaSyDK8iBShvK_MyyHCyVLmoSsoBk6295IrrQ",
+  authDomain: "react-firebase-7e1a7.firebaseapp.com",
+  databaseURL: "https://react-firebase-7e1a7.firebaseio.com",
+  projectId: "react-firebase-7e1a7",
+  storageBucket: "",
+  messagingSenderId: "179179280724",
+  appId: "1:179179280724:web:10a41c07b79b0789"
+}; // let isInitialized = false
+
+let db;
+let auth;
+const settings = {
+  /* your settings... */
+}; // function initialize() {
+
+if (!firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.apps.length) {
+  firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializeApp(config);
+  auth = firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth();
+  db = firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.firestore();
+  db.settings(settings); // isInitialized = true
+} // }
+// initialize()
+
 
 
 

@@ -4,5 +4,5 @@ const withCSS = require('@zeit/next-css')
 /* Without CSS Modules, with PostCSS */
 
 module.exports = withCSS({
-    assetPrefix: isProd ? '/lyrics-finder' : '',
+    assetPrefix: isProd ? 'https://kenil27.github.io/lyrics-finder/' : '',
 })

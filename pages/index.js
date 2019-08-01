@@ -1,5 +1,4 @@
 import React from "react";
-import getConfig from 'next/config';
 import { app, auth, db } from "../utils/firebase";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style.css";
@@ -13,8 +12,6 @@ import {
   Col,
   Badge
 } from "reactstrap";
-
-const { publicRuntimeConfig } = getConfig();
 
 class Home extends React.Component {
   state = {
@@ -109,7 +106,7 @@ class Home extends React.Component {
           fetchData ? (
             <div>
               <img
-                src={`${publicRuntimeConfig.staticFolder}/loader.gif`}
+                src="./static/loader.gif"
                 alt=""
                 width="100px"
                 height="100px"

@@ -5,4 +5,8 @@ const withCSS = require('@zeit/next-css')
 
 module.exports = withCSS({
     assetPrefix: isProd ? '/lyrics-finder' : '',
+    publicRuntimeConfig: {
+        // Will be available on both server and client
+        staticFolder: '/static'
+      }
 })

@@ -47,17 +47,11 @@
     "byName": {
       "commons": 0,
       "static/runtime/webpack.js": 1,
-      "static/Cmy1y0DmhMlJZd2a876X9/pages/_app.js": 2,
-      "static/Cmy1y0DmhMlJZd2a876X9/pages/_error.js": 3,
-      "static/Cmy1y0DmhMlJZd2a876X9/pages/index.js": 4,
+      "static/rXdE3JPJZRWsmhsu9fVBc/pages/_app.js": 2,
+      "static/rXdE3JPJZRWsmhsu9fVBc/pages/_error.js": 3,
+      "static/rXdE3JPJZRWsmhsu9fVBc/pages/index.js": 4,
       "static/runtime/main.js": 5,
-      "styles": 6,
-      "static/zQ5a1FpDG8y_Mv45lw0jt/pages/_app.js": 7,
-      "static/zQ5a1FpDG8y_Mv45lw0jt/pages/_error.js": 8,
-      "static/zQ5a1FpDG8y_Mv45lw0jt/pages/index.js": 9,
-      "static/3eWFQpAOX_3jssLX5iynE/pages/_app.js": 2,
-      "static/3eWFQpAOX_3jssLX5iynE/pages/_error.js": 3,
-      "static/3eWFQpAOX_3jssLX5iynE/pages/index.js": 4
+      "styles": 6
     },
     "bySource": {},
     "usedIds": [

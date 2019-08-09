@@ -41632,41 +41632,38 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], {
+      style: {
+        paddingTop: '15px'
+      },
       __source: {
         fileName: _jsxFileName,
         lineNumber: 118
       },
       __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Alert"], {
+      color: "info",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 119
       },
       __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Badge"], {
-      color: "danger",
+    }, "We currently do not have any lyrics for this stavan.")))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 120
-      },
-      __self: this
-    }, "We currently do not have \n any lyrics for this stavan."))))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 131
+        lineNumber: 127
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 132
+        lineNumber: 128
       },
       __self: this
     }, result[0].name.toUpperCase()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "result",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 133
+        lineNumber: 129
       },
       __self: this
     }, result[0].lyric.toLowerCase())));

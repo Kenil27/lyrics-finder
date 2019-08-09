@@ -10,7 +10,7 @@ import {
   Container,
   Row,
   Col,
-  Badge
+  Alert
 } from "reactstrap";
 
 class Home extends React.Component {
@@ -115,14 +115,10 @@ class Home extends React.Component {
           ) : !isResult ? null : (
             <Container>
               <Row>
-                <Col>
-                  <h2>
-                    <Badge color="danger">
-                      {
-                        "We currently do not have \n any lyrics for this stavan."
-                      }
-                    </Badge>
-                  </h2>
+                <Col style={{ paddingTop : '15px'}}>
+                    <Alert color="info">
+                      We currently do not have any lyrics for this stavan.
+                    </Alert>
                 </Col>
               </Row>
             </Container>

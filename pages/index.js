@@ -14,12 +14,16 @@ import {
 } from "reactstrap";
 
 class Home extends React.Component {
-  state = {
-    value: "",
-    result: [{ name: "", lyric: "" }],
-    searchLoader: true,
-    isResult: false,
-    fetchData: false
+  constructor(props){
+    super(props)
+    this.state = {
+      value: "",
+      result: [{ name: "", lyric: "" }],
+      searchLoader: true,
+      isResult: false,
+      fetchData: false,
+      list : []
+    }
   };
 
   componentDidMount = () => {
@@ -27,6 +31,25 @@ class Home extends React.Component {
       this.errorMessage = error.message;
     });
     this.listenToAuth();
+
+    let {list} = this.state;
+    auth.signInAnonymously().catch(function(error) {
+      this.errorMessage = error.message;
+    });
+    this.listenToAuth();
+
+    let search = db
+      .collection("stavan");
+
+    search.get().then(querySnapshot => {
+      if (querySnapshot.docs.length > 0) {
+        querySnapshot.forEach(doc => {
+          const { name } = doc.data();
+          list.push(name);
+        });
+      }
+    });
+    this.setState({list});
   };
 
   listenToAuth = () => {
@@ -80,8 +103,24 @@ class Home extends React.Component {
     });
   };
 
+  handleClick = (name) => {
+    let inputValue = document.getElementsByClassName('form-control')[0].value;
+    inputValue = name;
+    this.setState({value : inputValue}, ()=>{
+      this.handleSearch();
+    })
+  }
+
   render() {
-    let { result, searchLoader, fetchData, isResult } = this.state;
+    let { result, searchLoader, fetchData, isResult, list, value } = this.state;
+
+    let filteredList = list.filter((element)=>{
+      return (element.indexOf(value.toLowerCase()) > -1)
+   })
+
+   if(filteredList[0] === value && !searchLoader){
+     filteredList = []
+   }
     return (
       <div className="container">
         <h2>Lyrics Finder</h2>
@@ -102,6 +141,14 @@ class Home extends React.Component {
           </InputGroupAddon>
         </InputGroup>
 
+        {value 
+          ?
+          <div className="search-container">
+          {filteredList.map((name)=>{
+            return <span className='search-list' onClick={this.handleClick.bind(this, name)}>{name}</span>
+          })}
+          </div>
+        : null}
         {searchLoader ? (
           fetchData ? (
             <div>

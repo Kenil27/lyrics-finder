@@ -27,5 +27,18 @@ p{
     color: #414756;
     background-color: #f3f3f4;
 }
+.search-container{
+    padding: 0;
+}
+.search-list {
+    display: flex;
+    background-color: white;
+    cursor: pointer;
+    padding-left: 10px;
+    border: 1px solid #888888;
+}
+.search-list:hover{
+    background-color: #f3f3f4;
+}
 
 /*# sourceMappingURL=styles.chunk.css.map*/

@@ -41454,25 +41454,35 @@ var _jsxFileName = "/home/kenil/kenil/lyrics/pages/index.js";
 
 
 class Home extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
-  constructor(...args) {
-    super(...args);
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "state", {
-      value: "",
-      result: [{
-        name: "",
-        lyric: ""
-      }],
-      searchLoader: true,
-      isResult: false,
-      fetchData: false
-    });
+  constructor(props) {
+    super(props);
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "componentDidMount", () => {
       _utils_firebase__WEBPACK_IMPORTED_MODULE_2__["auth"].signInAnonymously().catch(function (error) {
         this.errorMessage = error.message;
       });
       this.listenToAuth();
+      let {
+        list
+      } = this.state;
+      _utils_firebase__WEBPACK_IMPORTED_MODULE_2__["auth"].signInAnonymously().catch(function (error) {
+        this.errorMessage = error.message;
+      });
+      this.listenToAuth();
+      let search = _utils_firebase__WEBPACK_IMPORTED_MODULE_2__["db"].collection("stavan");
+      search.get().then(querySnapshot => {
+        if (querySnapshot.docs.length > 0) {
+          querySnapshot.forEach(doc => {
+            const {
+              name
+            } = doc.data();
+            list.push(name);
+          });
+        }
+      });
+      this.setState({
+        list
+      });
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "listenToAuth", () => {
@@ -41543,6 +41553,28 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
         }
       });
     });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "handleClick", name => {
+      let inputValue = document.getElementsByClassName('form-control')[0].value;
+      inputValue = name;
+      this.setState({
+        value: inputValue
+      }, () => {
+        this.handleSearch();
+      });
+    });
+
+    this.state = {
+      value: "",
+      result: [{
+        name: "",
+        lyric: ""
+      }],
+      searchLoader: true,
+      isResult: false,
+      fetchData: false,
+      list: []
+    };
   }
 
   render() {
@@ -41550,31 +41582,41 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       result,
       searchLoader,
       fetchData,
-      isResult
+      isResult,
+      list,
+      value
     } = this.state;
+    let filteredList = list.filter(element => {
+      return element.indexOf(value.toLowerCase()) > -1;
+    });
+
+    if (filteredList[0] === value && !searchLoader) {
+      filteredList = [];
+    }
+
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "container",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 86
+        lineNumber: 125
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 87
+        lineNumber: 126
       },
       __self: this
     }, "Lyrics Finder"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 88
+        lineNumber: 127
       },
       __self: this
     }, "Find Lyrics for any stavan"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["InputGroup"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 90
+        lineNumber: 129
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Input"], {
@@ -41585,14 +41627,14 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       onKeyPress: this.onInputKeyPress,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 91
+        lineNumber: 130
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["InputGroupAddon"], {
       addonType: "append",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 98
+        lineNumber: 137
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Button"], {
@@ -41600,13 +41642,30 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       onClick: this.handleSearch,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 99
+        lineNumber: 138
       },
       __self: this
-    }, "Search"))), searchLoader ? fetchData ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    }, "Search"))), value ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "search-container",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 107
+        lineNumber: 146
+      },
+      __self: this
+    }, filteredList.map(name => {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: "search-list",
+        onClick: this.handleClick.bind(this, name),
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 148
+        },
+        __self: this
+      }, name);
+    })) : null, searchLoader ? fetchData ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 154
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
@@ -41616,19 +41675,19 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       height: "100px",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 108
+        lineNumber: 155
       },
       __self: this
     })) : !isResult ? null : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Container"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 116
+        lineNumber: 163
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 117
+        lineNumber: 164
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], {
@@ -41637,33 +41696,33 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 118
+        lineNumber: 165
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_5__["Alert"], {
       color: "info",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 119
+        lineNumber: 166
       },
       __self: this
     }, "We currently do not have any lyrics for this stavan.")))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 127
+        lineNumber: 174
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 128
+        lineNumber: 175
       },
       __self: this
     }, result[0].name.toUpperCase()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "result",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 129
+        lineNumber: 176
       },
       __self: this
     }, result[0].lyric.toLowerCase())));
